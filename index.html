@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            max-width: 600px;
+            height: 70vh;
+            overflow-y: auto;
+            background-color: white;
+        }
+        #messageInput {
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            margin-top: 10px;
+        }
+        #messageInput input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #messageInput button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat"></div>
+    <div id="messageInput">
+        <input type="text" id="message" placeholder="Type your message here...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        // Replace these with your Pusher credentials
+        const PUSHER_APP_KEY = 'your_pusher_key';
+        const PUSHER_CLUSTER = 'your_pusher_cluster';
+
+        // Initialize Pusher
+        const pusher = new Pusher(PUSHER_APP_KEY, {
+            cluster: PUSHER_CLUSTER,
+            encrypted: true
+        });
+
+        const channel = pusher.subscribe('chat');
+
+        channel.bind('message', function(data) {
+            const chat = document.getElementById('chat');
+            const message = document.createElement('div');
+            message.textContent = data.message;
+            chat.appendChild(message);
+            chat.scrollTop = chat.scrollHeight;
+        });
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value;
+
+            if (message.trim()) {
+                // Replace 'https://your-server-url/send-message' with your actual server URL
+                fetch('https://your-repl-name.repl.co/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+                messageInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
