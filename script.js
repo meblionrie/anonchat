@@ -1,12 +1,12 @@
-// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDgYXaV59Nvf-YUyj9OqcTlwlkWLs1_334",
+  authDomain: "anonchat-d469f.firebaseapp.com",
+  projectId: "anonchat-d469f",
+  storageBucket: "anonchat-d469f.appspot.com",
+  messagingSenderId: "647520645360",
+  appId: "1:647520645360:web:7aa654cb50b3eec67d5235",
+  measurementId: "G-NKXGVEDL5H"
 };
 
 // Initialize Firebase
